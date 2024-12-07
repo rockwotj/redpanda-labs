@@ -5,6 +5,7 @@ networks:
 volumes:
   redpanda-0: null
   minio: null
+  postgres: null
 services:
   redpanda-0:
     container_name: redpanda-0
@@ -65,6 +66,24 @@ services:
     depends_on:
       - minio
       - catalog
+  postgres:
+    container_name: postgres
+    image: postgres:17
+    environment:
+      POSTGRES_PASSWORD: foobar
+      POSTGRES_USER: me
+      POSTGRES_DB: datbase
+    command:
+      - postgres
+      - -c
+      - wal_level=logical
+    ports:
+      - 5432:5432
+    volumes:
+      - postgres:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - redpanda_network
   minio:
     container_name: minio
     image: minio/minio
