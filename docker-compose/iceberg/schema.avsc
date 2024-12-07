@@ -1,10 +1,15 @@
 {
     "type" : "record",
-    "namespace" : "com.redpanda.examples.avro",
-    "name" : "ClickEvent",
+    "namespace" : "com.nasdaq",
+    "name" : "HistoricalQuote",
     "fields" : [
-       { "name": "user_id", "type" : "int" },
-       { "name": "event_type", "type" : "string" },
-       { "name": "ts", "type": "string" }
+        { "name": "id", "type" : "long" },
+        { "name": "symbol", "type" : "string" },
+        { "name": "date", "type" : "string" },
+        { "name": "close", "type": "string" },
+        { "name": "volume", "type": "int" },
+        { "name": "open", "type": "string" },
+        { "name": "high", "type": "string" },
+        { "name": "low", "type": "string" }
     ]
- }
+}
