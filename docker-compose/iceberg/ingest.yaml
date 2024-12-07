@@ -1,0 +1,15 @@
+input:
+  csv:
+    paths: ["./AAPL_historical_max.csv"]
+output:
+  sql_insert:
+    driver: "postgres"
+    dsn: "postgres://me:foobar@localhost:5432/datbase?sslmode=disable"
+    table: quotes
+    columns: [symbol, date, close, volume, open, high, low]
+    args_mapping: root = [this.Symbol, this.Date, this.Close, this.Volume, this.Open, this.High, this.Low]
+    max_in_flight: 64
+    batching:
+      count: 100
+      period: "1s"
+
